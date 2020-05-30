@@ -1,0 +1,21 @@
+menu "SSD1306 OLED Configuration"
+
+    config GPIO_SDA_OLED
+        int "I2C SDA OLED GPIO number"
+        range 0 34
+        default 22
+        help
+            GPIO number (IOxx) conectes to the SDA pin from the OLED.
+
+            GPIOs 35-39 are input-only so cannot be used as outputs.
+
+    config GPIO_SCL_OLED
+        int "I2C SCL OLED GPIO number"
+        range 0 34
+        default 21
+        help
+            GPIO number (IOxx) conectes to the SCL pin from the OLED.
+        
+            GPIOs 35-39 are input-only so cannot be used as outputs.
+
+endmenu
