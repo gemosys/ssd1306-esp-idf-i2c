@@ -13,7 +13,7 @@ This sample code implement procedures to read values from 128x64 OLED display wi
 For local setup
 ----------
 
-For your local setup, connect SDI pin to GPIO 15 pin and the SCK to GPIO 2 pin as they are default ports (I2C_SDA, I2C_SCL) for I2C master according to `ESP32 datasheet`_, C.4. IO_MUX, Page 49.
+For your local setup, connect SDA pin to GPIO 21 pin and the SCL to GPIO 22 pin as they are default ports (I2C_SDA, I2C_SCL) for I2C master according to `ESP32 datasheet`_, C.4. IO_MUX, Page 49. This is only valid for ES32-WROOM DevKITC Board.
 
 Be aware about there are serveal models on 128x64 OLED display with SSD1306. Like one model with more pins works with both SPI/I2C, and another model with lesser pins works I2C only.  This cample code is confirmed with a OLED model which have (GND, VDD, SCK, SDA) pins and it supports I2C only (no SPI available). Perhaps your model has slightly different pins, but it should works.
 
