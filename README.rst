@@ -8,6 +8,7 @@ About
 ----------
 
 This sample code implement procedures to read values from 128x64 OLED display with SSD1306 driver via ESP-IDF's I2C master driver. It supports all features decribed in `Solomon Systech's SSD1306 datasheet`_.
+This is a modified Fork from the @yanbe original code.
 
 ----------
 For local setup
