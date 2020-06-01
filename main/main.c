@@ -57,6 +57,9 @@ void ssd1306_init() {
 	i2c_cmd_link_delete(cmd);
 }
 
+/*
+Not useful for a component
+
 void task_ssd1306_display_pattern(void *ignore) {
 	i2c_cmd_handle_t cmd;
 
@@ -77,6 +80,8 @@ void task_ssd1306_display_pattern(void *ignore) {
 
 	vTaskDelete(NULL);
 }
+
+*/
 
 void task_ssd1306_display_clear(void *ignore) {
 	i2c_cmd_handle_t cmd;
@@ -100,12 +105,13 @@ void task_ssd1306_display_clear(void *ignore) {
 	vTaskDelete(NULL);
 }
 
+/*
+Function modified to accept a parameter
+*/
 
-void task_ssd1306_contrast(void *ignore) {
+void task_ssd1306_contrast(uint8_t contrast) {
 	i2c_cmd_handle_t cmd;
 
-	uint8_t contrast = 0;
-	uint8_t direction = 1;
 	while (true) {
 		cmd = i2c_cmd_link_create();
 		i2c_master_start(cmd);
@@ -118,12 +124,12 @@ void task_ssd1306_contrast(void *ignore) {
 		i2c_cmd_link_delete(cmd);
 		vTaskDelay(1/portTICK_PERIOD_MS);
 
-		contrast += direction;
-		if (contrast == 0xFF) { direction = -1; }
-		if (contrast == 0x0) { direction = 1; }
 	}
 	vTaskDelete(NULL);
 }
+
+/* This feature need to be modified in order to make a vertical OR horizontal scroll I need to study the datasheet 
+
 
 void task_ssd1306_scroll(void *ignore) {
 	esp_err_t espRc;
@@ -159,6 +165,8 @@ void task_ssd1306_scroll(void *ignore) {
 
 	vTaskDelete(NULL);
 }
+
+*/
 
 void task_ssd1306_display_text(const void *arg_text) {
 	char *text = (char*)arg_text;
@@ -210,18 +218,4 @@ void task_ssd1306_display_text(const void *arg_text) {
 	}
 
 	vTaskDelete(NULL);
-}
-
-void app_main(void)
-{
-	i2c_master_init();
-	ssd1306_init();
-
-	//xTaskCreate(&task_ssd1306_display_pattern, "ssd1306_display_pattern",  2048, NULL, 6, NULL);
-	xTaskCreate(&task_ssd1306_display_clear, "ssd1306_display_clear",  2048, NULL, 6, NULL);
-	vTaskDelay(100/portTICK_PERIOD_MS);
-	xTaskCreate(&task_ssd1306_display_text, "ssd1306_display_text",  2048,
-		(void *)"Hello world!\nMultiline is OK!\nAnother line\nMore\nAnd More\nAnd other more\nUntil the end\n..\n", 6, NULL);
-	//xTaskCreate(&task_ssd1306_contrast, "ssid1306_contrast", 2048, NULL, 6, NULL);
-	//xTaskCreate(&task_ssd1306_scroll, "ssid1306_scroll", 2048, NULL, 6, NULL);
 }
