@@ -1,7 +1,8 @@
 Sample code for driving 128x64 OLED display with SSD1306 driver via ESP-IDF's I2C master driver
 ====================
+This is a fork from @yanbe/ssd1306-esp-idf-i2c
 
-See main code main.c_.
+My version is a simple ESP-IDF component to write strings, clear screen and set the contrast level.
 
 ----------
 About
